@@ -167,14 +167,7 @@ async function reservedViaConfig(
 			if (present) {
 				throw new GameError(409, `SteamId ${id} is already reserved.`, 'already_reserved');
 			}
-			const cap = parseMaxReservedSlots(doc.text);
-			if (cap !== null && ids.length >= cap) {
-				throw new GameError(
-					409,
-					`Reserved slots are full (${ids.length}/${cap}).`,
-					'reserved_full'
-				);
-			}
+			
 		} else if (!present) {
 			throw new GameError(404, `SteamId ${id} has no reserved slot.`, 'reserved_not_found');
 		}

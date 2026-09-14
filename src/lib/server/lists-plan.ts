@@ -191,13 +191,9 @@ export function planSync(i: PlanInput): SyncPlan {
 	let used = reserved.size - removing;
 	const room = i.cap === null ? Infinity : Math.max(0, i.cap - used);
 	// reserveAdds keeps the priority order of reserveDesired
-	for (const [n, add] of reserveAdds.entries()) {
-		if (n < room) {
-			plan.adds.push(add);
-			used++;
-		} else {
-			plan.overflow.push({ ...add, error: `${RESERVED_FULL} (${i.cap}/${i.cap}).` });
-		}
+	for (const [n, add] of reserveAdds.entries()) {		
+		plan.adds.push(add);
+		used++;		
 	}
 	plan.reservedUsed = used;
 	return plan;
